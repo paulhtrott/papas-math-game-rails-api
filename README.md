@@ -4,4 +4,18 @@
 2.6.3
 
 * Rails version
-6.*
+6.0.1
+
+## Setup
+
+```sh
+bundle
+```
+
+```sh
+rails db:create
+```
+
+```sh
+rails s
+```
