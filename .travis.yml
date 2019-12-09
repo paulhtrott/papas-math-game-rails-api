@@ -2,6 +2,9 @@ language: ruby
 rvm:
   - 2.6.3
 
+services:
+  - postgresql
+
 cache: bundler
 
 script: 'bundle exec rails test'
