@@ -1,3 +1,5 @@
+# frozen_string_literal: true.
+
 module PapasMath
   class Calculator
     attr_reader :array_of_numbers
