@@ -2,15 +2,18 @@
 
 module PapasMath
   class Calculator
-    attr_reader :array_of_numbers
-    attr_reader :calculated_values
-    attr_reader :combinations_used
-    attr_reader :flattened_collection
-    attr_reader :operation
-    attr_reader :errors
+    attr_reader :array_of_numbers,
+                :calculated_values,
+                :combinations_used,
+                :flattened_collection,
+                :numbers_to_choose_from,
+                :operation,
+                :user_message,
+                :errors
 
 
     def initialize(array_of_numbers)
+      @numbers_to_choose_from = []
       @array_of_numbers = array_of_numbers
       @flattened_collection = []
       @combinations_used = []
@@ -25,7 +28,7 @@ module PapasMath
       end
 
       # Flatten array, remove nil values, convert values in array to integer (converts strings to 0), remove 0 values.
-      @flattened_collection = @array_of_numbers.flatten.compact.map { |i| i.to_i }.select { |i| i != 0 }
+      @flattened_collection = @array_of_numbers.flatten.compact.map { |i| i.to_i }.sort.select { |i| i != 0 }
 
       if @flattened_collection.blank?
         @errors = ['Calculator does not have any values to work on']
@@ -42,6 +45,8 @@ module PapasMath
       @calculated_values.uniq! if remove_duplicates
 
       @calculated_values.sort! if sort
+
+      gather_numbers_to_choose_from
 
       # Complete
       true
@@ -81,6 +86,18 @@ module PapasMath
           addition: '+',
           multiplication: '*'
         }
+      end
+
+      def gather_numbers_to_choose_from
+        numbers = flattened_collection.sort
+        lowest = numbers.first - rand(1..10)
+        lowest_number = lowest < 1 ? 1 : lowest
+
+        highest_number  = numbers.last + rand(1..10)
+
+        @user_message = "Figure out which #{numbers.size} numbers were used to get the following answers. Options are from #{lowest_number} to #{highest_number}."
+
+        @numbers_to_choose_from = (lowest_number..highest_number).to_a
       end
   end
 end
