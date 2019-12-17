@@ -148,5 +148,16 @@ describe PapasMath::Calculator, type: :model do
       expect(calculator.errors).to be_nil
       expect(calculator.numbers_to_choose_from).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     end
+
+    it 'should calculate as addition if operation requested does not exist' do
+      calculator = PapasMath::Calculator.new([1, 2, 3])
+
+      expect(calculator.execute(operation: :none_existent)).to eq(true)
+      expect(calculator.errors).to be_nil
+      expect(calculator.operation).to eq(:addition)
+      expect(calculator.flattened_collection).to eq([1, 2, 3])
+      expect(calculator.calculated_values).to eq([3, 4, 5, 6])
+      expect(calculator.combinations_used).to eq(['1+2+3=6', '1+2=3', '1+3=4', '2+3=5'])
+    end
   end
 end
