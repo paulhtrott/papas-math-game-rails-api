@@ -3,11 +3,11 @@
 module PapasMathGame
   # Generate values and answers needed for Papas Math Game.
   class Create
-    attr_reader :calculator
-    attr_reader :operation
-    attr_reader :max_range
-    attr_reader :number_count
-    attr_reader :random_numbers
+    attr_reader :calculator,
+                :max_range,
+                :number_count,
+                :operation,
+                :random_numbers
 
     # Initialize a new instance of [PapasMathGame::Create].
     #

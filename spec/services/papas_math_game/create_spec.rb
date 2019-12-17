@@ -32,19 +32,30 @@ describe PapasMathGame::Create do
 
   describe '#execute' do
     it 'should set random numbers correctly' do
+      expect_any_instance_of(PapasMathGame::Create).to receive(:rand).and_return(2, 9, 6)
+      allow_any_instance_of(PapasMath::Calculator).to receive(:rand).and_return(5)
+
       service = PapasMathGame::Create.new(3, 12)
 
       expect(service.execute).to eq(true)
+      expect(service.number_count).to eq(3)
       expect(service.random_numbers.size).to eq(3)
+      expect(service.random_numbers).to eq([2, 9, 6])
+      expect(service.max_range).to eq(13)
     end
 
     it'should set calculator values correctly' do
+      expect_any_instance_of(PapasMathGame::Create).to receive(:rand).and_return(2, 9, 6, 7, 53, 12)
+      allow_any_instance_of(PapasMath::Calculator).to receive(:rand).and_return(5)
+
       service = PapasMathGame::Create.new(6, 132)
 
       expect(service.execute).to eq(true)
       expect(service.random_numbers.size).to eq(6)
-      expect(service.calculator).to_not be_nil
-      expect(service.calculator.array_of_numbers).to eq(service.random_numbers)
+      expect(service.random_numbers).to eq([2, 9, 6, 7, 53, 12])
+      expect(service.calculator.array_of_numbers).to eq([2, 9, 6, 7, 53, 12])
+      expect(service.calculator.flattened_collection).to eq([2, 6, 7, 9, 12, 53])
+      expect(service.calculator.numbers_to_choose_from).to eq((1..58).to_a)
     end
   end
 end

@@ -5,6 +5,7 @@ describe PapasMath::Calculator, type: :model do
     it 'should initialize correctly, wioth empty array' do
       calculator = PapasMath::Calculator.new([])
 
+      expect(calculator.numbers_to_choose_from).to eq([])
       expect(calculator.array_of_numbers).to eq([])
       expect(calculator.flattened_collection).to eq([])
       expect(calculator.combinations_used).to eq([])
@@ -126,6 +127,26 @@ describe PapasMath::Calculator, type: :model do
       expect(calculator.flattened_collection).to eq([1, 2, 3])
       expect(calculator.calculated_values).to eq([2, 3, 6, 6])
       expect(calculator.combinations_used).to eq(['1*2*3=6', '1*2=2', '1*3=3', '2*3=6'])
+    end
+
+    it 'should return true and set user message correctly' do
+      allow_any_instance_of(PapasMath::Calculator).to receive(:rand).and_return(6)
+
+      calculator = PapasMath::Calculator.new([5, 2, 3, 7])
+
+      expect(calculator.execute).to eq(true)
+      expect(calculator.errors).to be_nil
+      expect(calculator.user_message).to eq("Figure out which 4 numbers were used to get the following answers. Options are from 1 to 13.")
+    end
+
+    it 'should return true and set numbers_to_choose_from correctly' do
+      allow_any_instance_of(PapasMath::Calculator).to receive(:rand).and_return(5)
+
+      calculator = PapasMath::Calculator.new([5, 2, 3, 7])
+
+      expect(calculator.execute).to eq(true)
+      expect(calculator.errors).to be_nil
+      expect(calculator.numbers_to_choose_from).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
     end
   end
 end
