@@ -10,4 +10,4 @@ before_script:
 
 cache: bundler
 
-script: 'bundle exec rails test'
+script: 'bundle exec rspec spec'
