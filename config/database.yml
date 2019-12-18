@@ -1,5 +1,4 @@
 # PostgreSQL. Versions 9.3 and up are supported.
-
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -10,6 +9,8 @@ default: &default
 development:
   <<: *default
   database: papas_math_game_development
+  username: postgres
+  host: db
 
 test:
   <<: *default
