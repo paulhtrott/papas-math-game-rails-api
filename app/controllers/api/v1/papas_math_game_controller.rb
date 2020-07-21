@@ -6,7 +6,7 @@ module Api
       #
       # Get usable game calculation values.
       def index
-        service = PapasMathGame::Create.new(5)
+        service = PapasMathGame::Create.new(7)
 
         if service.execute
           render json: { game: service.calculator, success: true }, status: :ok
