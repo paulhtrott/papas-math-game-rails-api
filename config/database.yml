@@ -9,8 +9,6 @@ default: &default
 development:
   <<: *default
   database: papas_math_game_development
-  username: postgres
-  host: db
 
 test:
   <<: *default
