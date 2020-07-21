@@ -11,5 +11,5 @@
     "RACK_ENV": "staging",
     "RAILS_SERVE_STATIC_FILES": "true"
   },
-  "addons": ["heroku-postgresql", "rollbar"]
+  "addons": ["heroku-postgresql", "rollbar", "papertrail"]
 }
