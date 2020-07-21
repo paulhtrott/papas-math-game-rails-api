@@ -7,8 +7,8 @@
     "postdeploy": "bundle exec rake db:migrate"
   },
   "env": {
-    "RAILS_ENV": "development",
-    "RACK_ENV": "development",
+    "RAILS_ENV": "staging",
+    "RACK_ENV": "staging",
     "RAILS_SERVE_STATIC_FILES": "true"
   },
   "addons": ["heroku-postgresql", "rollbar"]
